@@ -11,9 +11,6 @@ concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: false
 
-env:
-  GITHUB_TOKEN: ${{ secrets.ROBOT_GITHUB_OAUTH_TOKEN }}
-
 defaults:
   run:
     shell: bash
@@ -50,5 +47,8 @@ jobs:
           gh version
 
       - name: "Create release on GitHub"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         run: |
           gh release create ${{ steps.nexttag.outputs.tag }} --generate-notes --latest
+          
