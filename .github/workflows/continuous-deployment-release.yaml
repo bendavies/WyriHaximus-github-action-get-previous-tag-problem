@@ -44,5 +44,5 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         run: |
-          gh release create ${{ steps.nexttag.outputs.tag }} --generate-notes --latest
+          gh release create ${{ steps.nexttag.outputs.tag }} --target ${{ github.sha }} --generate-notes --latest
           
